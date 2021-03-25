@@ -88,7 +88,6 @@ def converte_para_duplamente_infinita(linhas, alfabeto_da_fita):
                     tupla_aux = [estado_aux2.rstrip(
                         '\n'), simbolo, simbolo, "l", estado_destino]
                     escreve(tupla_aux, arquivo)
-                    arquivo.write('\n\n')
 
                 #escreve(aux2, arquivo)
 
