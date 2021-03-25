@@ -4,9 +4,15 @@ firstaux _ ¢ r second_aux
 second_aux 0 1 r 1o
 1o 1 1 l aux1o
 aux1o ¢ ¢ r 1o
-aux21o _ _ r 1o
-1o _ _ l 1o
-aux21o 0 0 r 1o
-1o 0 0 l 1o
-aux21o 1 1 r 1o
-1o 1 1 l 1o
+aux1o _ _ r aux21o
+aux21o _ _ l 1o
+
+
+aux1o 0 0 r aux21o
+aux21o 0 0 l 1o
+
+
+aux1o 1 1 r aux21o
+aux21o 1 1 l 1o
+
+

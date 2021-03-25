@@ -68,6 +68,7 @@ def converte_para_duplamente_infinita(linhas, alfabeto_da_fita):
                 tupla_aux = tupla
                 estado_destino = tupla_aux[4]
                 tupla_aux[4] = "aux" + tupla_aux[4]
+                estado_aux_copia = tupla_aux[4]
                 escreve(tupla_aux, arquivo)
 
                 # se ler o caracater que indica o inicio da fita
@@ -79,14 +80,15 @@ def converte_para_duplamente_infinita(linhas, alfabeto_da_fita):
                 # se ler qualquer outro simbolo, simula o movimento estacionario
                 tupla_aux2 = tupla
                 tupla_aux2[4] = "aux2" + tupla_aux[4]
-                estado_aux2 = tupla_aux[4]
+                estado_aux2 = tupla_aux2[4]
                 for simbolo in alfabeto_da_fita:
-                    tupla_aux = [tupla_aux2[4].rstrip(
+                    tupla_aux = [estado_aux_copia.rstrip(
                         '\n'), simbolo, simbolo, "r", estado_aux2]
                     escreve(tupla_aux, arquivo)
                     tupla_aux = [estado_aux2.rstrip(
                         '\n'), simbolo, simbolo, "l", estado_destino]
                     escreve(tupla_aux, arquivo)
+                    arquivo.write('\n\n')
 
                 #escreve(aux2, arquivo)
 
