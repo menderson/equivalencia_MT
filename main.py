@@ -100,7 +100,7 @@ def converte_para_duplamente_infinita(linhas, alfabeto_da_fita):
 def converte_para_sipser(linhas, alfabeto_da_fita):
     # cria o arquivo ou substitui se já existir
     arquivo = open('saida.txt', 'w')
-    arquivo.write((";I\n"))
+    arquivo.write((";S\n"))
     arquivo.close()
 
     # abre o aquivo em modo apend
@@ -112,6 +112,10 @@ def converte_para_sipser(linhas, alfabeto_da_fita):
     aux3 = "aux3\n"
     aux4 = "aux4\n"
     aux5 = "aux5\n"
+
+    # remove simbolo * do alfabeto da fita
+    if "*" in alfabeto_da_fita:
+        alfabeto_da_fita.remove("*")
 
     # tuplas auxiliares para deslocar todos os simbolos umas vez para a direita
     tupla_aux = ["0", "0", "¢", "r", aux1]
@@ -175,22 +179,65 @@ def converte_para_sipser(linhas, alfabeto_da_fita):
                 tupla[4] = estado_destino + "auxinicio\n"
                 escreve(tupla, arquivo)
 
-                # tupla para verificar se o simbolo lido é o de inicio da fita ¢
-                tupla_aux = [estado_destino + "auxinicio", "¢",
-                             "_", "r", estado_destino + "auxinicio2\n"]
-                escreve(tupla_aux, arquivo)
-
-                # desenvolver
-
                 # se o simbolo lido nao for o de inicio da fita, simula o movimento estacionario e vai para o estado destino
                 for simbolo in alfabeto_da_fita:
                     if simbolo != "*":
                         tupla = [estado_destino + "auxinicio", simbolo,
-                                 simbolo, "r", estado_destino + "estadoauxnotend\n"]
+                                 simbolo, "r", estado_destino + "estadoauxnotbegin\n"]
                         escreve(tupla, arquivo)
-                tupla = [estado_destino + "estadoauxnotend", "*",
+                tupla = [estado_destino + "estadoauxnotbegin", "*",
                          "*", "l", estado_destino + "\n"]
                 escreve(tupla, arquivo)
+
+                # tupla para verificar se o simbolo lido é o de inicio da fita ¢
+                tupla_aux = [estado_destino + "auxinicio", "¢",
+                             "¢", "r", estado_destino + "auxinicio2\n"]
+                escreve(tupla_aux, arquivo)
+                # tupla_aux = [estado_destino + "auxinicio1", "*",
+                #             "*", "l", estado_destino + "auxinicio2\n"]
+                #escreve(tupla_aux, arquivo)
+
+                # acresenta simbolo final ao alfabeto da fita
+                if "§" not in alfabeto_da_fita:
+                    alfabeto_da_fita.append("§")
+                if "¢" not in alfabeto_da_fita:
+                    alfabeto_da_fita.append("¢")
+
+                # faz o deslocamento de todos os elementos da fita uma casa para a direita
+                estado_auxiliar = estado_destino + "auxinicio2"
+                for simbolo in alfabeto_da_fita:
+
+                    estado_auxiliar_simbolo = estado_destino + "auxinicio2" + simbolo
+                    if simbolo != "asas":
+                        tupla = [estado_auxiliar, simbolo,
+                                 "_", "r", estado_auxiliar_simbolo + "\n"]
+                        escreve(tupla, arquivo)
+
+                    else:
+                        tupla = [estado_auxiliar, simbolo,
+                                 simbolo, "r", estado_auxiliar_simbolo + "\n"]
+                        escreve(tupla, arquivo)
+
+                    for simbolo_aux in alfabeto_da_fita:
+                        if simbolo_aux != "_" and simbolo != "§":
+                            tupla = [estado_auxiliar_simbolo, simbolo_aux, simbolo,
+                                     "r", estado_destino + "auxinicio2" + simbolo_aux + "\n"]
+                            escreve(tupla, arquivo)
+                        else:
+                            tupla = [estado_auxiliar_simbolo, simbolo_aux, "§",
+                                     "l", "estado_auxiliar_voltar\n"]
+                            escreve(tupla, arquivo)
+
+                alfabeto_da_fita.remove("§")
+                for simbolo in alfabeto_da_fita:
+                    if simbolo != "¢":
+                        tupla = ["estado_auxiliar_voltar", simbolo,
+                                 simbolo, "l", "estado_auxiliar_voltar\n"]
+                        escreve(tupla, arquivo)
+                    else:
+                        tupla = ["estado_auxiliar_voltar", simbolo,
+                                 simbolo, "r", estado_destino + "\n"]
+                        escreve(tupla, arquivo)
 
             else:
                 # captura o estado destino e vai para um estado auxiliar
@@ -210,10 +257,9 @@ def converte_para_sipser(linhas, alfabeto_da_fita):
 
                 # se o simbolo lido nao for o de final da fita, simula o movimento estacionario e vai para o estado destino
                 for simbolo in alfabeto_da_fita:
-                    if simbolo != "*":
-                        tupla = [estado_destino + "auxfinal", simbolo,
-                                 simbolo, "l", estado_destino + "estadoauxnotend\n"]
-                        escreve(tupla, arquivo)
+                    tupla = [estado_destino + "auxfinal", simbolo,
+                             simbolo, "l", estado_destino + "estadoauxnotend\n"]
+                    escreve(tupla, arquivo)
                 tupla = [estado_destino + "estadoauxnotend", "*",
                          "*", "r", estado_destino + "\n"]
                 escreve(tupla, arquivo)
