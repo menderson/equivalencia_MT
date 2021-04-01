@@ -1,7 +1,9 @@
 ;I
-0 0 0 l 1o
-1o 0 0 r 2o
-2o 0 1 r 2o
-2o 1 1 r 3o
+0 0 0 r 1o
+1o 1 1 r 1o
+1o _ 1 l 2o
+2o 1 1 l 3o
 3o 1 1 l 3o
-3o 0 0 l halt-accept
+3o 0 0 l 4o
+4o _ 1 r 5o
+5o * * r halt-accept
