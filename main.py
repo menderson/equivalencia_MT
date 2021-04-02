@@ -167,6 +167,8 @@ def converte_para_sipser(linhas, alfabeto_da_fita):
                 tupla[4] = "aux5\n"
         linhas_modificadas.append(tupla)
 
+    # controle para nao inserir varios estados de voltar iguais
+    estado_voltar_criado = 0
     # iniciamos a ler as tuplas de entrada
     for linha in linhas_modificadas:
         tupla = linha
@@ -229,15 +231,17 @@ def converte_para_sipser(linhas, alfabeto_da_fita):
                             escreve(tupla, arquivo)
 
                 alfabeto_da_fita.remove("§")
-                for simbolo in alfabeto_da_fita:
-                    if simbolo != "¢":
-                        tupla = ["estado_auxiliar_voltar", simbolo,
-                                 simbolo, "l", "estado_auxiliar_voltar\n"]
-                        escreve(tupla, arquivo)
-                    else:
-                        tupla = ["estado_auxiliar_voltar", simbolo,
-                                 simbolo, "r", estado_destino + "\n"]
-                        escreve(tupla, arquivo)
+                if estado_voltar_criado == 0:
+                    for simbolo in alfabeto_da_fita:
+                        if simbolo != "¢":
+                            tupla = ["estado_auxiliar_voltar", simbolo,
+                                     simbolo, "l", "estado_auxiliar_voltar\n"]
+                            escreve(tupla, arquivo)
+                        else:
+                            tupla = ["estado_auxiliar_voltar", simbolo,
+                                     simbolo, "r", estado_destino + "\n"]
+                            escreve(tupla, arquivo)
+                    estado_voltar_criado = 1
 
             else:
                 # captura o estado destino e vai para um estado auxiliar
