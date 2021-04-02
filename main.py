@@ -167,6 +167,10 @@ def converte_para_sipser(linhas, alfabeto_da_fita):
                 tupla[4] = "aux5\n"
         linhas_modificadas.append(tupla)
 
+    # ATE AQUI OK
+    ####################
+    ###################################
+    ############################################
     # controle para nao inserir varios estados de voltar iguais
     estado_voltar_criado = 0
     # iniciamos a ler as tuplas de entrada
@@ -183,7 +187,7 @@ def converte_para_sipser(linhas, alfabeto_da_fita):
 
                 # se o simbolo lido nao for o de inicio da fita, simula o movimento estacionario e vai para o estado destino
                 for simbolo in alfabeto_da_fita:
-                    if simbolo != "*":
+                    if simbolo != "*" and simbolo != "¢":
                         tupla = [estado_destino + "auxinicio", simbolo,
                                  simbolo, "r", estado_destino + "estadoauxnotbegin\n"]
                         escreve(tupla, arquivo)
@@ -267,7 +271,7 @@ def converte_para_sipser(linhas, alfabeto_da_fita):
                 tupla = [estado_destino + "estadoauxnotend", "*",
                          "*", "r", estado_destino + "\n"]
                 escreve(tupla, arquivo)
-
+    arquivo.close()
     # <current state> <current symbol> <new symbol> <direction> <new state>
 
 
@@ -292,6 +296,20 @@ def main():
     else:
         print("Tipo invalido")
         exit()
+
+    # Remover possiveis linhas duplicadas
+    nome_arq = "saida.txt"
+    tip, lines = le_arquivo(nome_arq)
+
+    new_lines = []
+    for line in lines:
+        if line not in new_lines:
+            new_lines.append(line)
+
+    output_file = "output.txt"
+    f = open(output_file, 'w')
+    f.write(tip)
+    f.write("".join(new_lines))
 
 
 if __name__ == "__main__":

@@ -43,6 +43,7 @@ estado_auxiliar_voltar ¢ ¢ r 1o
 1o _ _ l 1oauxinicio
 1oauxinicio _ _ r 1oestadoauxnotbegin
 1oauxinicio 0 0 r 1oestadoauxnotbegin
+1oauxinicio ¢ ¢ r 1oestadoauxnotbegin
 1oestadoauxnotbegin * * l 1o
 1oauxinicio ¢ ¢ r 1oauxinicio2
 1oauxinicio2 _ _ r 1oauxinicio2_
