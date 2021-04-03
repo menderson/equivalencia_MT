@@ -6,7 +6,7 @@
 1o _ _ l 1o
 
 ;Vai para a direita testando o final e volta escrevendo infinitos zeros a esquerda
-;entrada: 0000
+;entrada: 00
 ;I
 0 0 0 r 1o
 1o _ _ r 2o
@@ -20,7 +20,7 @@
 7o _ 0 l 7o
 
 ;Exemplo prof: le mesma quantidade de 1s e 0s
-;entrada: 111000
+;entrada: binario com mesma quantidade de 1s e 0s
 ;I
 0 _ _ l 1
 0 0 0 r 0
@@ -68,8 +68,8 @@
 7 X X r 7
 
 
-
 ;Exemplo prof:
+;entrada: numero binario impar
 ;S
 0 0 0 r 1
 0 1 1 r 1
