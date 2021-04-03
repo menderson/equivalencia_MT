@@ -8,6 +8,11 @@ def le_arquivo(nome_arquivo):
         f = open(nome_arquivo, 'r')
         tipo = f.readline()
         linhas = f.readlines()
+
+        # se a ultima linha nao tiver quebra de linha "\n" no final, então acrescenta "\n"
+        if linhas[len(linhas)-1].find("\n") == -1:
+            linhas[len(linhas)-1] = linhas[len(linhas)-1] + "\n"
+
         return tipo, linhas
     except:
         print("Erro ao abrir o arquivo")

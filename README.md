@@ -27,7 +27,7 @@ $ python3 main.py entrada.txt
 
 O programa de Maquina de Turing equivalente estará salvo no arquivo "saida.txt"
 
-<br />
+<br />:
 
 ## Enunciado do trabalho
 
