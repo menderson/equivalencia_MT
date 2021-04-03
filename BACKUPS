@@ -1,4 +1,92 @@
+
+;Le e escreve infinitos brancos a esquerda
+; palavra de entrada: 0
 ;I
 0 0 0 l 1o
 1o _ _ l 1o
 
+;Vai para a direita testando o final e volta escrevendo infinitos zeros a esquerda
+;entrada: 0000
+;I
+0 0 0 r 1o
+1o _ _ r 2o
+1o 0 0 r 2o
+2o _ _ r 3o
+3o _ _ r 4o
+4o _ _ r 5o
+5o _ _ l 5o
+5o 0 0 l 6o
+6o 0 0 l 7o
+7o _ 0 l 7o
+
+;Exemplo prof: le mesma quantidade de 1s e 0s
+;entrada: 111000
+;I
+0 _ _ l 1
+0 0 0 r 0
+0 1 1 r 0
+0 B B r 0
+0 X X r 0
+1 1 _ r 2
+1 0 _ r 3
+1 _ _ r 4
+2 0 1 l 5
+2 1 1 l 5
+2 _ 1 l 5
+2 B 1 l 5
+2 X 1 l 5
+5 0 0 l 1
+5 1 1 l 1
+5 _ _ l 1
+5 B B l 1
+5 X X l 1
+3 0 0 l 6
+3 1 0 l 6
+3 _ 0 l 6
+3 B 0 l 6
+3 X 0 l 6
+6 0 0 l 1
+6 1 1 l 1
+6 _ _ l 1
+6 B B l 1
+6 X X l 1
+4 _ B r 7
+8 1 X l 9
+8 0 X l 10
+8 X X l 8
+8 B B r halt-accept
+9 1 1 l 9
+9 X X l 9
+9 0 X r 7
+10 0 0 l 10
+10 X X l 10
+10 1 X r 7
+7 _ _ l 8
+7 0 0 r 7
+7 1 1 r 7
+7 B B r 7
+7 X X r 7
+
+
+
+;Exemplo prof:
+;S
+0 0 0 r 1
+0 1 1 r 1
+1 0 0 r 0
+1 1 1 r 0
+1 _ _ l 2
+2 x x l 2
+2 0 x l 3
+2 1 x l 3
+3 0 0 r 4
+3 1 1 r 4
+3 x 1 r 6
+4 x x r 4
+4 1 1 r 4
+4 _ 1 l 5
+5 1 1 l 5
+5 x x l 2
+6 1 1 r 6
+6 x 1 r 6
+6 _ _ l halt-accept

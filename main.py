@@ -239,10 +239,10 @@ def converte_para_sipser(linhas, alfabeto_da_fita):
                         else:
                             # continue
                             tupla = [estado_auxiliar_simbolo, simbolo_aux, simbolo,
-                                     "r", "estado_auxiliar_voltar_final\n"]
+                                     "r", "estado_auxiliar_voltar_final" + estado_destino + "\n"]
                             escreve(tupla, arquivo)
-                            tupla = ["estado_auxiliar_voltar_final", "*", "§",
-                                     "l", "estado_auxiliar_voltar\n"]
+                            tupla = ["estado_auxiliar_voltar_final" + estado_destino, "*", "§",
+                                     "l", "estado_auxiliar_voltar" + estado_destino + "\n"]
                             escreve(tupla, arquivo)
 
                 ####################################################################################
@@ -256,14 +256,14 @@ def converte_para_sipser(linhas, alfabeto_da_fita):
                 if estado_voltar_criado == 0:
                     for simbolo in alfabeto_da_fita:
                         if simbolo != "¢":
-                            tupla = ["estado_auxiliar_voltar", simbolo,
-                                     simbolo, "l", "estado_auxiliar_voltar\n"]
+                            tupla = ["estado_auxiliar_voltar" + estado_destino, simbolo,
+                                     simbolo, "l", "estado_auxiliar_voltar" + estado_destino + "\n"]
                             escreve(tupla, arquivo)
                         else:
-                            tupla = ["estado_auxiliar_voltar", simbolo,
+                            tupla = ["estado_auxiliar_voltar" + estado_destino, simbolo,
                                      simbolo, "r", estado_destino + "\n"]
                             escreve(tupla, arquivo)
-                    estado_voltar_criado = 1
+                    #estado_voltar_criado = 1
 
             # Movimento de final da fita, daqui pra baixo ta funcionando
             else:
