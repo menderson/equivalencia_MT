@@ -209,12 +209,17 @@ def converte_para_sipser(linhas, alfabeto_da_fita):
                 if "¢" not in alfabeto_da_fita:
                     alfabeto_da_fita.append("¢")
 
+                ####################################################################################
+                ####################################################################################
+                ####################################################################################
+                ####################################################################################
+
                 # faz o deslocamento de todos os elementos da fita uma casa para a direita
                 estado_auxiliar = estado_destino + "auxinicio2"
                 for simbolo in alfabeto_da_fita:
 
                     estado_auxiliar_simbolo = estado_destino + "auxinicio2" + simbolo
-                    if simbolo != "asas":
+                    if simbolo != "ASAS":
                         tupla = [estado_auxiliar, simbolo,
                                  "_", "r", estado_auxiliar_simbolo + "\n"]
                         escreve(tupla, arquivo)
@@ -224,16 +229,29 @@ def converte_para_sipser(linhas, alfabeto_da_fita):
                                  simbolo, "r", estado_auxiliar_simbolo + "\n"]
                         escreve(tupla, arquivo)
 
+                    # AQUI COMEÇA O PROBLEMA
+
                     for simbolo_aux in alfabeto_da_fita:
-                        if simbolo_aux != "_" and simbolo != "§":
+                        if simbolo_aux != "§":
                             tupla = [estado_auxiliar_simbolo, simbolo_aux, simbolo,
                                      "r", estado_destino + "auxinicio2" + simbolo_aux + "\n"]
                             escreve(tupla, arquivo)
                         else:
-                            tupla = [estado_auxiliar_simbolo, simbolo_aux, "§",
+                            # continue
+                            tupla = [estado_auxiliar_simbolo, simbolo_aux, simbolo,
+                                     "r", "estado_auxiliar_voltar_final\n"]
+                            escreve(tupla, arquivo)
+                            tupla = ["estado_auxiliar_voltar_final", "*", "§",
                                      "l", "estado_auxiliar_voltar\n"]
                             escreve(tupla, arquivo)
 
+                ####################################################################################
+                ####################################################################################
+                ####################################################################################
+                ####################################################################################
+                ####################################################################################
+
+                # FUNCIONANDO pra achar o inicio
                 alfabeto_da_fita.remove("§")
                 if estado_voltar_criado == 0:
                     for simbolo in alfabeto_da_fita:
@@ -247,6 +265,7 @@ def converte_para_sipser(linhas, alfabeto_da_fita):
                             escreve(tupla, arquivo)
                     estado_voltar_criado = 1
 
+            # Movimento de final da fita, daqui pra baixo ta funcionando
             else:
                 # captura o estado destino e vai para um estado auxiliar
                 estado_destino = tupla[4].rstrip("\n")
